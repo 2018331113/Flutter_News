@@ -6,11 +6,10 @@ class Home extends StatelessWidget {
     return Column(
       children: [
         ListView.builder(
-          itemCount: ,
-          itemBuilder:(context,index){
-            return Container();
-          } 
-        ),
+            itemCount: 1,
+            itemBuilder: (context, index) {
+              return Container();
+            }),
       ],
     );
   }
@@ -19,7 +18,6 @@ class Home extends StatelessWidget {
 class CategoryWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-    );
+    return Container();
   }
 }
