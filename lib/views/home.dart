@@ -42,7 +42,7 @@ class _HomeState extends State<Home> {
         : SingleChildScrollView(
             physics: ScrollPhysics(),
             child: Container(
-              padding: EdgeInsets.all(8),
+              padding: EdgeInsets.all(12),
               child: Column(
                 children: [
                   //Category
@@ -72,10 +72,11 @@ class _HomeState extends State<Home> {
                           blogTitle: articles[index].title,
                           blogDescribtion: articles[index].description,
                           imgUrl: articles[index].urlToImage,
+                          url: articles[index].url,
                         );
                       },
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
