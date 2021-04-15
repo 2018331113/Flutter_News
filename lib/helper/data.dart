@@ -12,7 +12,7 @@ List<CategoryModel> getCategories() {
 
   //2
   categoryModel = new CategoryModel();
-  categoryModel.categoryName = "Entertaintment";
+  categoryModel.categoryName = "Entertainment";
   categoryModel.imgURL = kEntertainmentImgUrl;
   categories.add(categoryModel);
 
@@ -32,6 +32,18 @@ List<CategoryModel> getCategories() {
   categoryModel = new CategoryModel();
   categoryModel.categoryName = "Technology";
   categoryModel.imgURL = kTechnologyImgUrl;
+  categories.add(categoryModel);
+
+  //6
+  categoryModel = new CategoryModel();
+  categoryModel.categoryName = "Science";
+  categoryModel.imgURL = kScienceImgUrl;
+  categories.add(categoryModel);
+
+  //7
+  categoryModel = new CategoryModel();
+  categoryModel.categoryName = "Sports";
+  categoryModel.imgURL = kSportsImgUrl;
   categories.add(categoryModel);
 
   return categories;
