@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_news/helper/data.dart';
 import 'package:flutter_news/helper/news.dart';
@@ -5,6 +6,8 @@ import 'package:flutter_news/models/article_models.dart';
 import 'package:flutter_news/models/catergory_models.dart';
 import 'package:flutter_news/tiles/blog_tiles.dart';
 import 'package:flutter_news/tiles/category_tiles.dart';
+import 'package:flutter_news/widgets/customAppBar.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -15,11 +18,33 @@ class _HomeState extends State<Home> {
   List<CategoryModel> categories = [];
   List<ArticleModel> articles = [];
   bool _loading = true;
+  StreamSubscription subscription;
 
   void initState() {
     super.initState();
-    categories = getCategories();
-    getNews();
+    checkConnec();
+  }
+
+  void checkConnec() async {
+    subscription = InternetConnectionChecker().onStatusChange.listen((status) {
+      switch (status) {
+        case InternetConnectionStatus.connected:
+          showConnectivitySnackBar(hasInternet: true);
+          setState(() {
+            categories = getCategories();
+            getNews();
+          });
+
+          break;
+        case InternetConnectionStatus.disconnected:
+          setState(() {
+            _loading = true;
+          });
+
+          showConnectivitySnackBar(hasInternet: false);
+          break;
+      }
+    });
   }
 
   getNews() async {
@@ -28,6 +53,19 @@ class _HomeState extends State<Home> {
     articles = newsClass.news;
     setState(() {
       _loading = false;
+    });
+  }
+
+  void showConnectivitySnackBar({bool hasInternet}) {
+    final message = hasInternet ? "You are online" : "You have no internet";
+
+    final color = hasInternet ? Colors.lightGreen : Colors.redAccent;
+    setState(() {
+      CustomWidget().getSnackBar(
+        context: context,
+        message: message,
+        color: color,
+      );
     });
   }
 
@@ -81,5 +119,12 @@ class _HomeState extends State<Home> {
               ),
             ),
           );
+  }
+
+  @override
+  void dispose() {
+    subscription.cancel();
+
+    super.dispose();
   }
 }
