@@ -1,10 +1,7 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_news/helper/news.dart';
 import 'package:flutter_news/models/article_models.dart';
 import 'package:flutter_news/tiles/blog_tiles.dart';
-import 'package:flutter_news/views/home.dart';
 import 'package:flutter_news/widgets/customAppBar.dart';
 
 class CategoryView extends StatefulWidget {
@@ -16,7 +13,7 @@ class CategoryView extends StatefulWidget {
 
 class _CategoryViewState extends State<CategoryView> {
   List<ArticleModel> articles = [];
-  StreamSubscription newsSubscription;
+
   bool _loading = true;
 
   void initState() {
