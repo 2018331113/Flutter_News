@@ -1,7 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_news/helper/news.dart';
 import 'package:flutter_news/models/article_models.dart';
 import 'package:flutter_news/tiles/blog_tiles.dart';
+import 'package:flutter_news/views/home.dart';
+import 'package:flutter_news/widgets/customAppBar.dart';
 
 class CategoryView extends StatefulWidget {
   final String category;
@@ -12,6 +16,7 @@ class CategoryView extends StatefulWidget {
 
 class _CategoryViewState extends State<CategoryView> {
   List<ArticleModel> articles = [];
+  StreamSubscription newsSubscription;
   bool _loading = true;
 
   void initState() {
@@ -31,25 +36,7 @@ class _CategoryViewState extends State<CategoryView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        elevation: 0.0,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text("Flutter"),
-            Text(
-              "News",
-              style: TextStyle(
-                color: Colors.blueAccent,
-              ),
-            ),
-            SizedBox(
-              width: 55,
-            )
-          ],
-        ),
-      ),
+      appBar: CustomWidget().getAppBar(homePage: false),
       body: _loading
           ? Container(
               alignment: Alignment.center,
